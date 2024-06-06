@@ -92,16 +92,16 @@
 		return {
 		  editing: false, // Indica si el perfil está en modo de edición
 		  user: {
-			firstName: 'Jaylon',
-			lastName: 'Dias',
+			firstName: 'Victor',
+			lastName: 'Agudelo',
 			position: 'Desarrollador',
 			emails: [
-			  { id: 1, address: 'example@clerk.dev', primary: true, editing: false },
-			  { id: 2, address: 'example@personal.com', primary: false, editing: false },
-			  { id: 3, address: 'email@work.io', primary: false, editing: false },
+			  { id: 1, address: 'viactur11@gmail.com', primary: true, editing: false },
+			  //{ id: 2, address: 'example@personal.com', primary: false, editing: false },
+			  //{ id: 3, address: 'email@work.io', primary: false, editing: false },
 			],
 			phoneNumber: {
-			  number: '+1 (555) 123-4567',
+			  number: '+57 3183698745',
 			  editing: false,
 			},
 		  },
