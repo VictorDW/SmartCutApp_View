@@ -11,6 +11,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/vue-fontawesome": "^3.0.6",
+    "@smartweb/vue-flash-message": "^1.0.0-alpha.12",
     "axios": "^1.7.2",
     "loader-utils": "^3.2.1",
     "primeicons": "^7.0.0",

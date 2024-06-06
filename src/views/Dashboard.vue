@@ -354,7 +354,7 @@ const logout = (token) => {
     },
   };
 
-  axios.post('http://localhost:8080/auth/logout', null, config)
+  axios.post('http://smartcutawsapi-env-1.eba-zcdbc75b.sa-east-1.elasticbeanstalk.com/auth/logout', null, config)
     .then(response => {
       console.log(response);
       localStorage.removeItem('token');

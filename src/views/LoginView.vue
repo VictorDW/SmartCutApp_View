@@ -146,7 +146,7 @@ export default {
 
       try {
 
-        const response = await axios.post('http://localhost:8080/auth/login', payload, confi);
+        const response = await axios.post('http://smartcutawsapi-env-1.eba-zcdbc75b.sa-east-1.elasticbeanstalk.com/auth/login', payload, confi);
 
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('fullName', `${response.data.firstName} ${response.data.lastName}`);
