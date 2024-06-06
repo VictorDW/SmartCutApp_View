@@ -168,6 +168,7 @@ Aquí tienes el código con comentarios explicativos añadidos:
 vueCopy code<script setup>
 import { ref, computed, onMounted} from 'vue';
 import { useRouter } from 'vue-router';
+import axios from 'axios';
 
 
 const router = useRouter();
@@ -194,7 +195,6 @@ const toggleNotifications = () => {
 const toggleDropdown = () => {
   showDropdown.value = !showDropdown.value;
 };
-
 
 // Array de notificaciones
 const notifications = [
@@ -342,10 +342,28 @@ const navigateToUserManual = () => {
 };
 
 const navigateToLoginView = () => {
-  localStorage.removeItem('fullName');
-  localStorage.removeItem('token');
+  logout(localStorage.getItem('token'));
   router.push({ name: 'LoginView' });
 };
+
+const logout = (token) => {
+  
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  axios.post('http://localhost:8080/auth/logout', null, config)
+    .then(response => {
+      console.log(response);
+      localStorage.removeItem('token');
+      localStorage.removeItem('fullName');
+    })
+    .catch(error => {
+      console.error(error);
+    });
+}
 </script>
 
 <style scoped>
