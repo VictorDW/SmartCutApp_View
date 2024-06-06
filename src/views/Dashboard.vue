@@ -1,163 +1,167 @@
 
 <template>
-  <nav class="nav">
-    <div class="left-section">
-      <!-- Muestra el mensaje "Dashboard" -->
-      <div class="Dashboard-message">Dashboard</div>
-      <!-- Muestra un mensaje de bienvenida con el nombre de usuario -->
-      <div class="User-message">Bienvenido, {{ showDataUser() }}</div>
-    </div>
-    <div class="right-section">
-      <!-- Icono de notificación que activa/desactiva el desplegable de notificaciones -->
-      <div class="notification-icon" @click="toggleNotifications">
-        <span class="material-icons">notifications</span>
-        <!-- Desplegable de notificaciones que se muestra cuando showNotifications es true -->
-        <div class="notification-dropdown" v-if="showNotifications" style="width: 200px;">
-          <!-- Itera sobre el array de notificaciones y muestra cada notificación -->
-          <div class="notification-item" v-for="(notification, index) in notifications" :key="index">
-            <i class="material-icons">notifications_active</i>
-            <span class="notification-text">{{ notification }}</span>
+
+  <section class="main">
+    <nav class="nav">
+      <div class="left-section">
+        <!-- Muestra el mensaje "Dashboard" -->
+        <div class="Dashboard-message">Dashboard</div>
+        <!-- Muestra un mensaje de bienvenida con el nombre de usuario -->
+        <div class="User-message">Bienvenido, {{ showDataUser() }}</div>
+      </div>
+      <div class="right-section">
+        <!-- Icono de notificación que activa/desactiva el desplegable de notificaciones -->
+        <div class="notification-icon" @click="toggleNotifications">
+          <span class="material-icons ">notifications</span>
+          <!-- Desplegable de notificaciones que se muestra cuando showNotifications es true -->
+          <div class="notification-dropdown" v-if="showNotifications" style="width: 200px;">
+            <!-- Itera sobre el array de notificaciones y muestra cada notificación -->
+            <div class="notification-item" v-for="(notification, index) in notifications" :key="index">
+              <i class="material-icons">notifications_active</i>
+              <span class="notification-text">{{ notification }}</span>
+              <hr class="separator">
+            </div>
+          </div>
+        </div>
+        <!-- Separador entre el icono de notificación y el icono de usuario -->
+        <hr class="separator user-separator">
+        <!-- Icono de usuario que activa/desactiva el menú desplegable -->
+        <div class="user-icon" @click="toggleDropdown">
+          <span class="material-icons">person</span>
+        </div>
+        <!-- Menú desplegable que se muestra al hacer clic en el icono de usuario -->
+        <div class="dropdown-menu" @click="toggleDropdown">
+          <span class="material-icons">arrow_drop_down</span>
+          <!-- Menú desplegable que se muestra cuando showDropdown es true -->
+          <div class="menu-dropdown" v-if="showDropdown">
+            <!-- Elemento de menú para navegar al perfil de usuario -->
+            <div class="menu-item" @click="navigateToProfile">
+              <i class="material-icons">person</i> Perfil
+            </div>
+            <!-- Elemento de menú para navegar a la vista de creación de usuarios -->
+            <div class="menu-item" @click="navigateToRegisterView">
+              <i class="material-icons material-icons--add_user">group_add</i> Crear Usuarios
+            </div>
             <hr class="separator">
+            <!-- Elemento de menú para navegar al manual de usuario -->
+            <div class="menu-item" @click="navigateToUserManual">
+              <i class="material-icons">help</i> Manual de Usuario
+            </div>
+            <hr class="separator">
+            <!-- Elemento de menú para cerrar sesión y navegar a la vista de inicio de sesión -->
+            <div class="menu-item" @click="navigateToLoginView">
+              <i class="material-icons">exit_to_app</i> Cerrar Sesión
+            </div>
           </div>
         </div>
       </div>
-      <!-- Separador entre el icono de notificación y el icono de usuario -->
-      <hr class="separator user-separator">
-      <!-- Icono de usuario que activa/desactiva el menú desplegable -->
-      <div class="user-icon" @click="toggleDropdown">
-        <span class="material-icons">person</span>
-      </div>
-      <!-- Menú desplegable que se muestra al hacer clic en el icono de usuario -->
-      <div class="dropdown-menu" @click="toggleDropdown">
-        <span class="material-icons">arrow_drop_down</span>
-        <!-- Menú desplegable que se muestra cuando showDropdown es true -->
-        <div class="menu-dropdown" v-if="showDropdown">
-          <!-- Elemento de menú para navegar al perfil de usuario -->
-          <div class="menu-item" @click="navigateToProfile">
-            <i class="material-icons">person</i> Perfil
-          </div>
-          <!-- Elemento de menú para navegar a la vista de creación de usuarios -->
-          <div class="menu-item" @click="navigateToRegisterView">
-            <i class="material-icons">group_add</i> Crear Usuarios
-          </div>
-          <hr class="separator">
-          <!-- Elemento de menú para navegar al manual de usuario -->
-          <div class="menu-item" @click="navigateToUserManual">
-            <i class="material-icons">help</i> Manual de Usuario
-          </div>
-          <hr class="separator">
-          <!-- Elemento de menú para cerrar sesión y navegar a la vista de inicio de sesión -->
-          <div class="menu-item" @click="navigateToLoginView">
-            <i class="material-icons">exit_to_app</i> Cerrar Sesión
-          </div>
-        </div>
-      </div>
-    </div>
-  </nav>
+    </nav>
 
-  <div class="main-container" :style="{ ...globalStyles }">
-  <div class="main-cards" style="display: flex; flex-direction: row; margin-bottom: 20px; width: 100%">
-    <!-- Tarjeta de proveedores registrados -->
-    <div class="card" :style="{ ...cardStyles, ...cardPrimaryShadowStyles, flex: '1', marginRight: '20px', borderLeft: '5px solid #4E73DF' }">
-      <div class="card-content">
-        <div class="card-info">
-          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" style="font-weight: bold; color: black;">Proveedores Registrados</div>
-          <div class="h5 mb-2 font-weight-bold text-gray-800" style="font-weight: bold; font-size: 170%; text-align: center; margin-top: 20px;">6</div>
-        </div>
-        <span class="material-icons card_icon" style="color: #4E73DF; background-color: #f0f2f5; border-radius: 50%; padding: 8px;">local_shipping</span>
-      </div>
-    </div>
+    <div class="main-container" :style="{ ...globalStyles }">
+        <div class="main-cards" style="display: flex; flex-direction: row; margin-bottom: 20px; width: 100%">
+          <!-- Tarjeta de proveedores registrados -->
+          <div class="card" :style="{ ...cardStyles, ...cardPrimaryShadowStyles, flex: '1', marginRight: '20px', borderLeft: '5px solid #4E73DF' }">
+            <div class="card-content">
+              <div class="card-info">
+                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" style="font-weight: bold; color: black;">Proveedores Registrados</div>
+                <div class="h5 mb-2 font-weight-bold text-gray-800" style="font-weight: bold; font-size: 170%; text-align: center; margin-top: 20px;">6</div>
+              </div>
+              <span class="material-icons card_icon" style="color: #4E73DF; background-color: #f0f2f5; border-radius: 50%; padding: 8px;">local_shipping</span>
+            </div>
+          </div>
 
-    <!-- Tarjeta de materiales en inventario -->
-    <div class="card" :style="{ ...cardStyles, ...cardSuccessShadowStyles, flex: '1', marginRight: '20px', borderLeft: '5px solid #1CC88A' }">
-      <div class="card-content">
-        <div class="card-info">
-          <div class="text-xs font-weight-bold text-success text-uppercase mb-1" style="font-weight: bold; color: black;">Materiales en Inventario</div>
-          <div class="h5 mb-2 font-weight-bold text-gray-800" style="font-weight: bold; font-size: 170%; text-align: center; margin-top: 20px;">55</div>
-        </div>
-        <span class="material-icons card_icon" style="color: #1CC88A; background-color: #f0f2f5; border-radius: 50%; padding: 8px;">inventory_2</span>
-      </div>
-    </div>
+          <!-- Tarjeta de materiales en inventario -->
+          <div class="card" :style="{ ...cardStyles, ...cardSuccessShadowStyles, flex: '1', marginRight: '20px', borderLeft: '5px solid #1CC88A' }">
+            <div class="card-content">
+              <div class="card-info">
+                <div class="text-xs font-weight-bold text-success text-uppercase mb-1" style="font-weight: bold; color: black;">Materiales en Inventario</div>
+                <div class="h5 mb-2 font-weight-bold text-gray-800" style="font-weight: bold; font-size: 170%; text-align: center; margin-top: 20px;">55</div>
+              </div>
+              <span class="material-icons card_icon" style="color: #1CC88A; background-color: #f0f2f5; border-radius: 50%; padding: 8px;">inventory_2</span>
+            </div>
+          </div>
 
-    <!-- Tarjeta de proyectos creados -->
-    <div class="card" :style="{ ...cardStyles, ...cardInfoShadowStyles, flex: '1', borderLeft: '5px solid #36B9CC' }">
-      <div class="card-content">
-        <div class="card-info">
-          <div class="text-xs font-weight-bold text-info text-uppercase mb-1" style="font-weight: bold; color: black;">Proyectos Creados</div>
-          <div class="h5 mb-2 font-weight-bold text-gray-800" style="font-weight: bold; font-size: 170%; text-align: center; margin-top: 20px;">15</div>
+          <!-- Tarjeta de proyectos creados -->
+          <div class="card" :style="{ ...cardStyles, ...cardInfoShadowStyles, flex: '1', borderLeft: '5px solid #36B9CC' }">
+            <div class="card-content">
+              <div class="card-info">
+                <div class="text-xs font-weight-bold text-info text-uppercase mb-1" style="font-weight: bold; color: black;">Proyectos Creados</div>
+                <div class="h5 mb-2 font-weight-bold text-gray-800" style="font-weight: bold; font-size: 170%; text-align: center; margin-top: 20px;">15</div>
+              </div>
+              <span class="material-icons card_icon" style="color: #36B9CC; background-color: #f0f2f5; border-radius: 50%; padding: 8px;">engineering</span>
+            </div>
+          </div>
         </div>
-        <span class="material-icons card_icon" style="color: #36B9CC; background-color: #f0f2f5; border-radius: 50%; padding: 8px;">engineering</span>
-      </div>
-    </div>
-  </div>
 
-  <div class="tables" style="display: flex; flex-direction: row; width: 100%">
-    <!-- Tabla de materiales más utilizados -->
-    <div class="table" :style="{ ...tableStyles, width: '65%', marginRight: '15px' }">
-      <h3 style="color: #000000; margin-bottom: 16px; text-align: left">Materiales más Utilizados</h3>
-      <table style="width: 100%">
-        <thead>
-          <tr>
-            <th style="text-align: left">ID Material</th>
-            <th style="text-align: left">Nombre</th>
-            <th style="text-align: left">Cantidad</th>
-            <th style="text-align: left">Estado</th>
-          </tr>
-        </thead>
+        <div class="tables" style="display: flex; flex-direction: row; width: 100%">
+          <!-- Tabla de materiales más utilizados -->
+          <div class="table" :style="{ ...tableStyles, width: '65%', marginRight: '15px' }">
+            <h3 style="color: #000000; margin-bottom: 16px; text-align: left">Materiales más Utilizados</h3>
+            <table style="width: 100%">
+              <thead>
+                <tr>
+                  <th style="text-align: left">ID Material</th>
+                  <th style="text-align: left">Nombre</th>
+                  <th style="text-align: left">Cantidad</th>
+                  <th style="text-align: left">Estado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Itera sobre el array de materiales mostrados y muestra cada material en una fila de la tabla -->
+                <tr v-for="(material, index) in materialesMostrados" :key="material.id" style="margin-bottom: 5px; border-bottom: 1px solid black">
+                  <td>{{ material.id }}</td>
+                  <td>{{ material.nombre }}</td>
+                  <td>{{ material.cantidad }}</td>
+                  <!-- El color de fondo de la celda de estado depende del valor del estado del material -->
+                  <td :style="{ backgroundColor: material.estado === 'Disponible' ? '#1CC88A' : '#E74A3B', padding: '5px 10px', color: '#000000', borderRadius: '5px', textAlign: 'center', width: 'calc(100% - 10px)' }">{{ material.estado }}</td>
+                </tr>
+              </tbody>
+            </table>
+      <!-- Paginación de la tabla de materiales más utilizados -->
+      <div class="paginacion">
+        <!-- Botón para ir a la página anterior, deshabilitado si se encuentra en la primera página -->
+        <button @click="paginaAnteriorMateriales" :disabled="paginaActualMateriales === 1">&lt;</button>
+        <!-- Muestra la página actual y el total de páginas -->
+        <span>{{ paginaActualMateriales }} de {{ totalPaginasMateriales }}</span>
+        <!-- Botón para ir a la página siguiente, deshabilitado si se encuentra en la última página -->
+        <button @click="paginaSiguienteMateriales" :disabled="paginaActualMateriales === totalPaginasMateriales">&gt;</button>
+      </div>
+      </div>
+
+      <!-- Tabla de proyectos por operador -->
+      <div class="table" :style="{ ...tableStyles, width: '32%' }">
+      <h3 style="color: #000000; margin-bottom: 16px; text-align: left;">Proyectos por Operador</h3>
+      <table style="width: 100%; border-spacing: 0 5px;">
         <tbody>
-          <!-- Itera sobre el array de materiales mostrados y muestra cada material en una fila de la tabla -->
-          <tr v-for="(material, index) in materialesMostrados" :key="material.id" style="margin-bottom: 5px; border-bottom: 1px solid black">
-            <td>{{ material.id }}</td>
-            <td>{{ material.nombre }}</td>
-            <td>{{ material.cantidad }}</td>
-            <!-- El color de fondo de la celda de estado depende del valor del estado del material -->
-            <td :style="{ backgroundColor: material.estado === 'Disponible' ? '#1CC88A' : '#E74A3B', padding: '5px 10px', color: '#000000', borderRadius: '5px', textAlign: 'center', width: 'calc(100% - 10px)' }">{{ material.estado }}</td>
+          <!-- Itera sobre el array de proyectos mostrados y muestra cada proyecto en una fila de la tabla -->
+          <tr v-for="(proyecto, index) in proyectosMostrados" :key="proyecto.operador" style="margin-bottom: 5px; border-bottom: 1px solid black">
+            <td style="display: flex; align-items: center;">
+              <!-- Icono de usuario -->
+              <span class="material-icons" style="color: #CCCCCC; margin-right: 20px; font-size: 250%; border-radius: 50%; background-color: #f0f2f5; padding: 8px;">face</span>
+              <div style="display: flex; flex-direction: column;">
+                <!-- Nombre del operador -->
+                <div>{{ operadorNames[index] }}</div>
+                <!-- Cantidad de proyectos del operador -->
+                <div>{{ proyecto.cantidad }}</div>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>
-<!-- Paginación de la tabla de materiales más utilizados -->
-<div class="paginacion">
-  <!-- Botón para ir a la página anterior, deshabilitado si se encuentra en la primera página -->
-  <button @click="paginaAnteriorMateriales" :disabled="paginaActualMateriales === 1">&lt;</button>
-  <!-- Muestra la página actual y el total de páginas -->
-  <span>{{ paginaActualMateriales }} de {{ totalPaginasMateriales }}</span>
-  <!-- Botón para ir a la página siguiente, deshabilitado si se encuentra en la última página -->
-  <button @click="paginaSiguienteMateriales" :disabled="paginaActualMateriales === totalPaginasMateriales">&gt;</button>
-</div>
-</div>
-
-<!-- Tabla de proyectos por operador -->
-<div class="table" :style="{ ...tableStyles, width: '32%' }">
-<h3 style="color: #000000; margin-bottom: 16px; text-align: left;">Proyectos por Operador</h3>
-<table style="width: 100%; border-spacing: 0 5px;">
-  <tbody>
-    <!-- Itera sobre el array de proyectos mostrados y muestra cada proyecto en una fila de la tabla -->
-    <tr v-for="(proyecto, index) in proyectosMostrados" :key="proyecto.operador" style="margin-bottom: 5px; border-bottom: 1px solid black">
-      <td style="display: flex; align-items: center;">
-        <!-- Icono de usuario -->
-        <span class="material-icons" style="color: #CCCCCC; margin-right: 20px; font-size: 250%; border-radius: 50%; background-color: #f0f2f5; padding: 8px;">face</span>
-        <div style="display: flex; flex-direction: column;">
-          <!-- Nombre del operador -->
-          <div>{{ operadorNames[index] }}</div>
-          <!-- Cantidad de proyectos del operador -->
-          <div>{{ proyecto.cantidad }}</div>
-        </div>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<!-- Paginación de la tabla de proyectos por operador -->
-<div class="paginacion">
-  <!-- Botón para ir a la página anterior, deshabilitado si se encuentra en la primera página -->
-  <button @click="paginaAnteriorProyectos" :disabled="paginaActualProyectos === 1">&lt;</button>
-  <!-- Muestra la página actual y el total de páginas -->
-  <span>{{ paginaActualProyectos }} de {{ totalPaginasProyectos }}</span>
-  <!-- Botón para ir a la página siguiente, deshabilitado si se encuentra en la última página -->
-  <button @click="paginaSiguienteProyectos" :disabled="paginaActualProyectos === totalPaginasProyectos">&gt;</button>
-</div>
-</div>
-</div>
-</div>
+      <!-- Paginación de la tabla de proyectos por operador -->
+      <div class="paginacion">
+        <!-- Botón para ir a la página anterior, deshabilitado si se encuentra en la primera página -->
+        <button @click="paginaAnteriorProyectos" :disabled="paginaActualProyectos === 1">&lt;</button>
+        <!-- Muestra la página actual y el total de páginas -->
+        <span>{{ paginaActualProyectos }} de {{ totalPaginasProyectos }}</span>
+        <!-- Botón para ir a la página siguiente, deshabilitado si se encuentra en la última página -->
+        <button @click="paginaSiguienteProyectos" :disabled="paginaActualProyectos === totalPaginasProyectos">&gt;</button>
+      </div>
+      </div>
+      </div>
+    </div>
+  </section>
+ 
 </template>
   
 Aquí tienes el código con comentarios explicativos añadidos:
@@ -345,11 +349,16 @@ const navigateToLoginView = () => {
 </script>
 
 <style scoped>
+
+.main {
+  position: relative;
+  width: 100%;
+}
 .nav {
   position: absolute;
   top: 12px;
-  left: var(--sidebar-width);
-  width: calc(100% - var(--sidebar-width));
+  left: 16px;
+  width: calc(100% - 16px);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -400,6 +409,10 @@ const navigateToLoginView = () => {
   margin-bottom: 5px;
 }
 
+.material-icons--add_user {
+  margin-left: 4px;
+}
+
 .top-section {
   display: flex;
   align-items: center;
@@ -431,6 +444,10 @@ const navigateToLoginView = () => {
   background-color: #CCCCCC;
 }
 
+.dropdown-menu {
+  cursor: pointer;
+}
+
 .notification-dropdown,
 .menu-dropdown {
   position: absolute;
@@ -447,8 +464,10 @@ const navigateToLoginView = () => {
 
 .notification-item,
 .menu-item {
-  margin-bottom: 5px;
-  margin-left: 1px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px;
   cursor: pointer;
 }
 
