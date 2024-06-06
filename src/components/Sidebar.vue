@@ -103,7 +103,7 @@ aside {
   }
 
   .logo {
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     display: flex;
 
     img {
@@ -127,8 +127,12 @@ aside {
     transition: 0.2s ease-in-out;
 
     .menu-toggle {
+      display: flex;
+      align-items: center;
       transition: 0.2s ease-in-out;
+
       .material-icons {
+        line-height: normal;
         font-size: 2rem;
         color: var(--light);
         transition: 0.2s ease-out;
@@ -144,8 +148,8 @@ aside {
   }
 
   .menu-toggle-circle {
-    width: 2rem;
-    height: 2rem;
+    width: 2.1rem;
+    height: 2.1rem;
     border-radius: 50%;
     background-color: var(--dark-alt);
     display: flex;
@@ -164,6 +168,7 @@ aside {
     font-size: 0.875rem;
     margin-bottom: 0.5rem;
     margin-top: 0.5rem;
+    margin-left: 12px;
     text-transform: uppercase;
   }
 
@@ -174,7 +179,6 @@ aside {
       display: flex;
       align-items: center;
       text-decoration: none;
-
       transition: 0.2s ease-in-out;
       padding: 0.5rem 1rem;
 
@@ -209,7 +213,7 @@ aside {
     }
   }
   .separator {
-    width: calc(100% - 1.5rem);
+    width: calc(100% - 1rem);
     margin-left: 0.5rem;
     margin-right: 0.5rem;
     border-top: 1px solid var(--light);
@@ -227,12 +231,9 @@ aside {
   &.is-expanded {
     width: var(--sidebar-width);
 
-    .menu-toggle-wrap {
-      top: -3rem;
-
       .menu-toggle {
         transform: rotate(-180deg);
-      }
+    
     }
 
     h3,
