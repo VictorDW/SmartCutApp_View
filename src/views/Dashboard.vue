@@ -347,10 +347,9 @@ const navigateToLoginView = () => {
 <style scoped>
 .nav {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 12px;
   left: var(--sidebar-width);
-  width: 75%;
+  width: calc(100% - var(--sidebar-width));
   display: flex;
   justify-content: space-between;
   align-items: center;
